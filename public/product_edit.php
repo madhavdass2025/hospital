@@ -1,10 +1,14 @@
 <?php
-// TODO: Add authentication and authorization check here.
+// core configuration
+include_once "../config/core.php";
+
+// check if logged in as admin
+include_once "admin_checker.php";
 
 // get ID of the product to be edited
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 
-// include database and object files
+// include classes
 include_once '../src/Database.php';
 include_once '../src/Product.php';
 

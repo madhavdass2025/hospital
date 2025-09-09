@@ -1,10 +1,14 @@
 <?php
-// TODO: Add authentication and authorization check here.
+// core configuration
+include_once "../config/core.php";
+
+// check if logged in as admin
+include_once "admin_checker.php";
 
 // check if value was posted
 if($_POST){
 
-    // include database and object file
+    // include classes
     include_once '../src/Database.php';
     include_once '../src/Product.php';
 

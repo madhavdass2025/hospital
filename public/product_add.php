@@ -1,14 +1,14 @@
 <?php
-// TODO: Add authentication and authorization check here.
-// For example:
-// if (!is_user_logged_in() || !current_user_can('manage_products')) {
-//     die('Access denied.');
-// }
+// core configuration
+include_once "../config/core.php";
 
-// page title
+// check if logged in as admin
+include_once "admin_checker.php";
+
+// set page title
 $page_title = "Add Product";
 
-// include database and object files
+// include classes
 include_once '../src/Database.php';
 include_once '../src/Product.php';
 

@@ -1,8 +1,14 @@
 <?php
+// core configuration
+include_once "../config/core.php";
+
+// check if logged in as admin
+include_once "admin_checker.php";
+
 // page title
 $page_title = "Products";
 
-// include database and object files
+// include classes
 include_once '../src/Database.php';
 include_once '../src/Product.php';
 
