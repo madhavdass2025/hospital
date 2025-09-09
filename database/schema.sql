@@ -38,10 +38,34 @@ CREATE TABLE `products` (
 CREATE TABLE `patients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `owner_name` varchar(255) NOT NULL,
+  `owner_contact` varchar(50) DEFAULT NULL,
   `pet_name` varchar(255) NOT NULL,
-  `breed` varchar(100) DEFAULT NULL,
+  `pet_species` varchar(100) DEFAULT NULL,
+  `pet_breed` varchar(100) DEFAULT NULL,
+  `pet_sex` enum('Male','Female','Unknown') DEFAULT 'Unknown',
+  `pet_dob` date DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Casesheets table for patient visit records
+CREATE TABLE `casesheets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `visit_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `patient_history` text,
+  `symptoms` text,
+  `diagnosis` text,
+  `prescribed_medicines` text,
+  `lab_tests_ordered` text,
+  `notes` text,
+  PRIMARY KEY (`id`),
+  KEY `patient_id` (`patient_id`),
+  KEY `doctor_id` (`doctor_id`),
+  CONSTRAINT `casesheets_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `casesheets_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Sales orders table to track sales transactions

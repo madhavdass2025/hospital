@@ -88,5 +88,18 @@ class User {
         // return false if email does not exist in the database
         return false;
     }
+
+    // read one user
+    function readOne(){
+        $query = "SELECT username, role, status FROM " . $this->table_name . " WHERE id = ? LIMIT 0,1";
+        $stmt = $this->conn->prepare( $query );
+        $stmt->bindParam(1, $this->id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->username = $row['username'];
+        $this->role = $row['role'];
+        $this->status = $row['status'];
+    }
 }
 ?>
